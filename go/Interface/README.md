@@ -9,6 +9,26 @@
      …
  }
 ```
+## 断言接口是否实现
+
+```go
+type Inter interface{
+    Impl()
+}
+
+type S struct{}
+
+func (s *S) Impl(){}
+
+func main(){
+    // 判断*S 是否实现了Inter 接口，未实现编译时将报错
+    var _ Inter =(*S)(nil)
+
+    s:=&S{}
+    s.Impl()
+}
+```
+
 
 如何要一个 struct 可以使用接口？
 只要让 struct 实现接口里面的全部方法即可，并且接收者为 struct.
