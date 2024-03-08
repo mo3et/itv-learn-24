@@ -9,6 +9,7 @@ import (
 
 type Student struct {
 	gorm.Model
+	Id string `gorm:"column:di,primary" `
 }
 
 func NewMysqlDB() *gorm.DB {
@@ -19,9 +20,8 @@ func NewMysqlDB() *gorm.DB {
 		log.Fatal("failed to connect.")
 		// panic("failed to connect.")
 	}
-	if err := db.AutoMigrate(&Student); err != nil {
+	if err := db.AutoMigrate(&Student{}); err != nil {
 		panic(err)
 	}
-
 	return db
 }
