@@ -33,6 +33,7 @@ func main() {
 	logs.Info("logger is success running.")
 	rService, err := data.NewRedisService(logger)
 	if err != nil {
+		rService.Logger.
 		logs.Errorf("Failed to initialize Redis service: %v", err)
 		return
 	}

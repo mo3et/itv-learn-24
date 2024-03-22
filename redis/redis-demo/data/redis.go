@@ -16,8 +16,9 @@ import (
 // )
 
 type RedisService struct {
-	client *redis.Client
-	logger *log.Helper
+	Client *redis.Client
+	Logger *log.Helper
+	// *log.Helper
 }
 
 var (
@@ -45,54 +46,54 @@ func NewRedisService(logs log.Logger) (*RedisService, error) {
 
 		// 初始化 RedisService 实例
 		instance = &RedisService{
-			client: client,
-			logger: log.NewHelper(logs),
+			Client: client,
+			Logger: log.NewHelper(logs),
 		}
 	})
 	return instance, nil
 }
 
-func Getclient(logs log.Logger) *redis.Client {
-	rds, err := NewRedisService(logs)
-	fmt.Println("Get Client failed.", err)
-	return rds.client
-}
+// func Getclient(logs log.Logger) *redis.Client {
+// 	rds, err := NewRedisService(logs)
+// 	fmt.Println("Get Client failed.", err)
+// 	return rds.client
+// }
 
 func (rs *RedisService) Close() error {
 	// close Redis client connect
-	return rs.client.Close()
+	return rs.Client.Close()
 }
 
 func (rs *RedisService) SetPlayerUsername(playerId int, username string) error {
 	// 构建key name
 	key := fmt.Sprintf("player:%d:username", playerId)
 
-	exists, err := rs.client.Exists(context.Background(), key).Result()
+	exists, err := rs.Client.Exists(context.Background(), key).Result()
 	if err != nil {
-		rs.logger.Errorf("Failed to check if key exists: %v", err)
+		rs.Logger.Errorf("Failed to check if key exists: %v", err)
 		return err
 	}
 	// set player data
 	// 命名空间用:来分隔, 会进行分组(或者理解为分成表), 例如 Player:id:name
 	if exists == 0 {
-		// err = rs.client.Set(context.Background(), fmt.Sprintf("player:%d:username", playerId), username, 10*time.Hour).Err()
+		// err = rs.Client.Set(context.Background(), fmt.Sprintf("player:%d:username", playerId), username, 10*time.Hour).Err()
 		// nx 如果exist 则不执行set 并返回错误
-		err = rs.client.SetNX(context.Background(), fmt.Sprintf("player:%d:username", playerId), username, 10*time.Hour).Err()
+		err = rs.Client.SetNX(context.Background(), fmt.Sprintf("player:%d:username", playerId), username, 10*time.Hour).Err()
 		if err != nil {
-			rs.logger.Errorf("Failed to set player username: %v", err)
+			rs.Logger.Errorf("Failed to set player username: %v", err)
 			return err
 		}
 	} else {
-		rs.logger.Info("ID:", key, username, " is Exists!\n")
+		rs.Logger.Info("ID:", key, username, " is Exists!\n")
 	}
 	return nil
 }
 
 func (rs *RedisService) GetPlayerUsername(playerId int) (string, error) {
 	// get player data
-	username, err := rs.client.Get(context.Background(), fmt.Sprintf("player:%d:username", playerId)).Result()
+	username, err := rs.Client.Get(context.Background(), fmt.Sprintf("player:%d:username", playerId)).Result()
 	if err != nil {
-		rs.logger.Errorf("Failed to get player username: %v", err)
+		rs.Logger.Errorf("Failed to get player username: %v", err)
 	}
 	return username, err
 }

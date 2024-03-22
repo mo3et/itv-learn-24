@@ -21,8 +21,11 @@ var (
 func TestRedisBase(logs klog.Logger) {
 	defer wg.Done()
 
-	rdb := Getclient(logs)
-
+	rds, err := NewRedisService(logs)
+	if err != nil {
+		rds.Logger.Error(err)
+	}
+	rdb := rds.Client
 	// Example_String(rdb)
 	// Example_List(rdb)
 	// Example_Hash(rdb)
