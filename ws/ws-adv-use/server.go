@@ -18,6 +18,8 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
+// TODO 需要复习 wsHandler 包括心跳发送，长连接的内容
+
 func wsHandler(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {

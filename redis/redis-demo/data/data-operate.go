@@ -26,17 +26,17 @@ func TestRedisBase(logs klog.Logger) {
 		rds.Logger.Error(err)
 	}
 	rdb := rds.Client
-	// Example_String(rdb)
-	// Example_List(rdb)
-	// Example_Hash(rdb)
-	// Example_Set(rdb)
+	Example_String(rdb)
+	Example_List(rdb)
+	Example_Hash(rdb)
+	Example_Set(rdb)
 	Example_SortedSet(rdb)
-	// Example_HyperLogLog(rdb)
+	Example_HyperLogLog(rdb)
 	Example_PubSub(rdb)
-	// Example_CMD(rdb)
-	// Example_Scan(rdb)
-	// Example_Tx(rdb)
-	// Example_Script(rdb)
+	Example_CMD(rdb)
+	Example_Scan(rdb)
+	Example_Tx(rdb)
+	Example_Script(rdb)
 }
 
 func Example_String(rdb *redis.Client) {

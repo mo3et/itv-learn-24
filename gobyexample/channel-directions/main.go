@@ -10,15 +10,14 @@ import "fmt"
 // 该ping函数仅接受用于发送值的通道。
 // 尝试在此通道上接收将是一个编译时错误。
 
-// 只读channel
+// 只写channel (receive)
 func ping(pings chan<- string, msg string) {
 	pings <- msg
 }
 
-// 该pong函数接受一个通道用于接收 (pings)，
-// 第二个通道用于发送 (pongs)。
+// 该pong函数接受一个通道用于接收 (pings)，[让channel接收,只读]
+// 第二个通道用于发送 (pongs)。[发送到channel,只写]
 
-// 只写channel
 func pong(pings <-chan string, pongs chan<- string) {
 	msg := <-pings
 	pongs <- msg
