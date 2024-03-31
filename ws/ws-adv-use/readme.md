@@ -40,7 +40,7 @@ func main() {
 2. **Client-side Communication**: You can use JavaScript on the client-side to establish a WebSocket connection with the Golang server. Here's an example:
 
 
-``` go
+``` js
 const socket = new WebSocket('ws://localhost:8080/ws');
 
 socket.onopen = () => {

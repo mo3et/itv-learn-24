@@ -41,6 +41,7 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 	}()
 
 	// more handle
+	// 可以在 loop 中，从ws 连接 `conn` 读写信息。根据收到的信息实现不同逻辑
 	for {
 		messageType, message, err := conn.ReadMessage()
 		if err != nil {
@@ -56,6 +57,10 @@ func wsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+// Advance Features
+// 实现多client广播[可以维护连接列表，并遍历这些连接以发送信息]
+// 实现自定义消息格式、错误处理和安全措施。
 
 func main() {
 	http.HandleFunc("/ws", wsHandler)
