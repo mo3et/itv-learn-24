@@ -29,10 +29,13 @@ fmt.Printf("type c :%T\n", c) // type c :reflect.Value
 - Set Value
 ```go
 func reflectSetValue(x interface{}) {
+	// 将x( interface{} )转为reflect.Value 类型
+	
 	v := reflect.ValueOf(x)
 	// 反射中使用 Elem()方法获取指针对应的值
 	if v.Elem().Kind() == reflect.Int64 {
-		v.Elem().SetInt(200)
+		// 通过 Elem().Set修改值
+		v.Elem().SetInt(200) 
 	}
 }
 
