@@ -117,3 +117,5 @@ context 主要用于父子任务直接的同步取消信号，本质上是一种
 上游任务仅仅使用 Context 通知下游任务不再需要，但不会直接干涉和终端下游任务的执行，  
 由下游任务执行决定后续的处理操作，就是说 Context 的取消操作是**无侵入的**。  
 Context 是线程安全的，因为 Context 本身是不可变的，所以可以放心在多协程中传递使用。
+
+> More:[Context - Go面试宝典](https://golang.design/go-questions/stdlib/context/why/)

@@ -6,8 +6,6 @@ import (
 	"time"
 )
 
-
-
 // 实现 Cancel Signal
 
 func ContextCancelExample() {
@@ -34,8 +32,8 @@ func ContextCancelExample() {
 
 		// 要实现闭包效果 需要将闭包函数赋予一个变量，相当于初始化
 		// 每次调用就会叠加
-		val := ctx.Value(userid)
-		helloFunc := Hello(val.(string))
+		// val := ctx.Value(userid)
+		// helloFunc := Hello(val.(string))
 
 		for range ticker.C {
 			select {
@@ -45,11 +43,11 @@ func ContextCancelExample() {
 			default:
 				fmt.Printf("send message: %d\n", <-message)
 				// 之前错误原因在于多次实例化 Hello(val),导致被覆盖
-				helloFunc()
+				// helloFunc()
+				process(ctx)
 			}
 		}
 	}(ctx)
-
 	defer close(message)
 	// 防御式编程 如果在超时前完成则释放资源
 	defer cancel()
@@ -63,14 +61,25 @@ func main() {
 	ContextCancelExample()
 }
 
-func Hello(nameStr string) func() {
-	// nameStr := name.(string)
+// func Hello(nameStr string) func() {
+// 	// nameStr := name.(string)
+// 	s := 0
+// 	if nameStr == "jason" {
+// 		return func() {
+// 			s++
+// 			fmt.Printf("%d is %s\n", s, nameStr)
+// 		}
+// 	}
+// 	return nil
+// }
+
+func process(ctx context.Context) {
 	s := 0
-	if nameStr == "jason" {
-		return func() {
-			s++
-			fmt.Printf("%d is %s\n", s, nameStr)
-		}
+	user, ok := ctx.Value(10).(string)
+	if ok {
+		s++
+		fmt.Printf("%d is %s\n", s, user)
+	} else {
+		fmt.Printf("process no user")
 	}
-	return nil
 }
