@@ -3,28 +3,32 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
 var (
 	instance *Singleton
 	mu       sync.Mutex
 	once     sync.Once
-	wg       sync.WaitGroup
+	// wg       sync.WaitGroup
 )
 
 type Singleton struct{}
 
 func GetSingleton(i int) *Singleton {
 	// fmt.Println(instance)
-	fmt.Printf("%d is %v\n", i, instance)
+
+	// fmt.Printf("%d is %v\n", i, instance)
 	if instance == nil {
 		mu.Lock()
 		defer mu.Unlock()
 		if instance == nil {
 			fmt.Println("init Singleton.")
 			instance = &Singleton{}
+		} else {
+			fmt.Println(i, " intance already created.")
 		}
+	} else {
+		fmt.Println(i, "intance already created.")
 	}
 	return instance
 }
@@ -69,22 +73,30 @@ func main() {
 	// fmt.Println(s)
 	// fmt.Println(a)
 
-	startTime := time.Now()
-	sumgo := 0
-	for i := 0; i < 2000000; i++ {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			sumgo++
-			GetSingleton(i)
-		}()
-	}
+	// startTime := time.Now()
+	// sumgo := 0
+	// for i := 0; i < 2000000; i++ {
+	// 	wg.Add(1)
+	// 	go func() {
+	// 		defer wg.Done()
+	// 		sumgo++
+	// 		GetSingleton(i)
+	// 	}()
+	// }
 
-	wg.Wait()
-	func() {
-		elapsedTime := time.Since(startTime)
-		fmt.Println("done when use ", elapsedTime)
-		fmt.Println("sum goroutine is ", sumgo)
-	}()
+	for i := 0; i < 1000; i++ {
+		go GetSingleton(i)
+	}
+	// Scanln is similar to Scan, but stops scanning at a newline and
+	// after the final item there must be a newline or EOF.
+	fmt.Scanln()
+
+	// wg.Wait()
+	// func() {
+	// 	elapsedTime := time.Since(startTime)
+	// 	fmt.Println("done when use ", elapsedTime)
+	// 	fmt.Println("sum goroutine is ", sumgo)
+	// }()
+
 	// select {}
 }

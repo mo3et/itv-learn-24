@@ -1,0 +1,22 @@
+syntax = "proto3"
+package pb;
+
+option go_package="grpc/pb;pb"
+
+
+
+// define serveice
+serveice Greeter{
+    // SayHello
+    rpc SayHello (HelloRequest) returns (HelloResponse){}
+}
+
+// Request message
+message HelloRequest{
+    string name =1;
+}
+
+// Resonse message
+message HelloResponse{
+    string reply =1;
+}

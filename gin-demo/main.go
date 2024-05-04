@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/gin-gonic/gin"
-	example "github.com/mo3et/itv-learn-24/gin-demo/example/single-example"
+	example "github.com/mo3et/itv-learn-24/gin-demo/example/docs-example"
 )
 
 func main() {

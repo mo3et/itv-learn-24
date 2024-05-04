@@ -8,6 +8,8 @@
 
 !!!! 推荐看这个仓库的Readme. [link1st/GoWebsocket](https://github.com/link1st/gowebsocket)
 
+[WebSocket 概念和实现](https://cloud.tencent.com/developer/article/1887095) 实现和易错知识 值得参考
+
 [煎鱼的WebSocket系列](https://golang2.eddycjy.com/posts/ch4/02-protocol/)，了解握手协议和细节，例如心跳 onclose
 
 跟着实现聊天室
