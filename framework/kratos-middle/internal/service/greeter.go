@@ -27,3 +27,11 @@ func (s *GreeterService) SayHello(ctx context.Context, in *v1.HelloRequest) (*v1
 	}
 	return &v1.HelloReply{Message: "Hello " + g.Hello}, nil
 }
+
+func (s *GreeterService) GetData(ctx context.Context, req *v1.GetDataRequest) (*v1.GetDataResponse, error) {
+	data, err := s.uc.GetData(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &v1.GetDataResponse{Data: data}, nil
+}

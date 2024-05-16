@@ -6,17 +6,24 @@ import "google/api/annotations.proto";
 
 option go_package = "kratos-middle/api/helloworld/v1;v1";
 option java_multiple_files = true;
-option java_package = "dev.kratos.api.helloworld.v1";
 option java_outer_classname = "HelloworldProtoV1";
+option java_package = "dev.kratos.api.helloworld.v1";
 
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {
-    option (google.api.http) = {
-      get: "/helloworld/{name}"
-    };
+  rpc SayHello(HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {get: "/helloworld/{name}"};
   }
+
+  // mock 下游请求服务
+  rpc GetData(GetDataRequest) returns (GetDataResponse);
+}
+
+message GetDataRequest {}
+
+message GetDataResponse {
+  string data = 1;
 }
 
 // The request message containing the user's name.
