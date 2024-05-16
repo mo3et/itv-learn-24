@@ -17,7 +17,7 @@ func main() {
 		defer wg.Done()
 		for i := 0; i < 10; i++ {
 			<-c1
-			fmt.Println("A")
+			fmt.Println("A", i)
 			c2 <- 1
 		}
 	}()
@@ -26,10 +26,9 @@ func main() {
 		defer wg.Done()
 		for i := 0; i < 10; i++ {
 			<-c2
-			fmt.Println("B")
+			fmt.Println("B", i)
 			c1 <- 1
 		}
 	}()
-
 	wg.Wait()
 }
