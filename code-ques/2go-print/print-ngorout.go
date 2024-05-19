@@ -17,7 +17,7 @@ func print_ngo() {
 
 	num := 1
 	j := 0
-	for i := 0; i < goroutineNum; i++ {
+	for i := 0; i <= goroutineNum-1; i++ {
 		go func(i int) {
 			for {
 				<-chanSlice[i] // 循环阻塞等待
