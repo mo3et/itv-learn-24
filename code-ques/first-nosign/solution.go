@@ -1,6 +1,9 @@
 package main
 
-import "sort"
+import (
+	"fmt"
+	"sort"
+)
 
 // 未签到的第一人
 // 根据已签到的n个编号，计算未签到的人的最小编号是多少
@@ -23,4 +26,7 @@ func solution(sign []int) int {
 }
 
 func main() {
+	sign := []int{1, 2, 3, 4, 7, 12, 11, 8}
+	res := solution(sign)
+	fmt.Println(res, len(sign))
 }
