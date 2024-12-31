@@ -2,7 +2,11 @@ module github.com/mo3et/itv-learn-24/gin-demo/example/gin-DB
 
 go 1.22.0
 
-require github.com/gin-gonic/gin v1.9.1
+require (
+	github.com/gin-gonic/gin v1.9.1
+	gorm.io/driver/mysql v1.5.4
+	gorm.io/gorm v1.25.7
+)
 
 require (
 	github.com/bytedance/sonic v1.11.2 // indirect
@@ -27,12 +31,10 @@ require (
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	golang.org/x/arch v0.7.0 // indirect
-	golang.org/x/crypto v0.21.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/net v0.22.0 // indirect
-	golang.org/x/sys v0.18.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	gorm.io/driver/mysql v1.5.4 // indirect
-	gorm.io/gorm v1.25.7 // indirect
 )
